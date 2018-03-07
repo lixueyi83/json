@@ -15,7 +15,7 @@ using json = nlohmann::json;
 
 int main(void)
 {
-    cout << "------------------------------" << endl;
+    cout << "----------------1--------------" << endl;
     /* test 1 */
     json j;
     j["pi"] = 3.14;
@@ -27,7 +27,7 @@ int main(void)
     cout << j["object"] << endl;
     cout << j << endl;
     
-    cout << "------------------------------" << endl;
+    cout << "----------------2--------------" << endl;
     /* test 2 */
     auto j2 = R"(
         {
@@ -38,7 +38,7 @@ int main(void)
     
     cout << j2 << endl;
     
-    cout << "------------------------------" << endl;
+    cout << "----------------3--------------" << endl;
     /* test 3 */
     string file = "myjson.json";
     std::ifstream i(file.c_str());
@@ -47,7 +47,7 @@ int main(void)
     i >> j3;
     cout << j3 << endl;
     
-    cout << "------------------------------" << endl;
+    cout << "----------------4--------------" << endl;
     /* test 4 */
     cout << g_config << endl;
 
