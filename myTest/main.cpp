@@ -13,7 +13,7 @@ using namespace std;
 
 using json = nlohmann::json; 
 
-int main(void)
+int main_create_json_object(void)
 {
     cout << "----------------1--------------" << endl;
     /* test 1 */
@@ -51,5 +51,78 @@ int main(void)
     /* test 4 */
     cout << g_config << endl;
 
+    cout << "------------------------------" << endl;
+    /* test 5 */
+    std::map<std::string, int> c_map { {"one", 1}, {"two", 2}, {"three", 3} };
+    json j_map(c_map);
+    cout << j_map << endl;
+
     return 0;
 }
+
+
+int main_json_from_string()
+{
+    cout << "--- 1. create object from string literal" << endl;
+    json j = R"(
+        {
+            "happy": true,
+            "pi": 3.14159
+        }
+    )"_json;
+    cout << j << endl;
+    
+    cout << "\n--- 2. explicit convert json object to string" << endl;
+    string s = j.dump();
+    cout << s << endl;
+    
+    cout << "\n--- 3. serialization with pretty printing with spaces to indent" << endl;
+    const int indentspaces = 4;
+    cout << j.dump(indentspaces) << endl;
+}
+
+int main_json_to_string()
+{
+    /* store a string in a JSON value */
+    json j_string = "this is a string";
+    cout << j_string << endl;
+
+    /* retrieve the string value (implicit JSON to std::string conversion) */
+    std::string cpp_string = j_string;
+    cout << cpp_string << endl;
+    
+    /* retrieve the string value (explicit JSON to std::string conversion) */
+    auto cpp_string2 = j_string.get<std::string>();
+    cout << cpp_string2 << endl;
+
+    /* retrieve the serialized value (explicit JSON serialization) */
+    std::string serialized_string = j_string.dump();
+    cout << serialized_string << endl;
+    
+    return 0;
+}
+
+int main()
+{
+    main_create_json_object();
+    main_json_from_string();
+    main_json_to_string();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
