@@ -13,7 +13,7 @@ using namespace std;
 
 using json = nlohmann::json; 
 
-int main_create_json_object(void)
+void create_json_object(void)
 {
     cout << "----------------1--------------" << endl;
     /* test 1 */
@@ -50,18 +50,10 @@ int main_create_json_object(void)
     cout << "----------------4--------------" << endl;
     /* test 4 */
     cout << g_config << endl;
-
-    cout << "------------------------------" << endl;
-    /* test 5 */
-    std::map<std::string, int> c_map { {"one", 1}, {"two", 2}, {"three", 3} };
-    json j_map(c_map);
-    cout << j_map << endl;
-
-    return 0;
 }
 
 
-int main_json_from_string()
+void json_from_string()
 {
     cout << "--- 1. create object from string literal" << endl;
     json j = R"(
@@ -81,7 +73,7 @@ int main_json_from_string()
     cout << j.dump(indentspaces) << endl;
 }
 
-int main_json_to_string()
+void json_to_string()
 {
     /* store a string in a JSON value */
     json j_string = "this is a string";
@@ -98,15 +90,42 @@ int main_json_to_string()
     /* retrieve the serialized value (explicit JSON serialization) */
     std::string serialized_string = j_string.dump();
     cout << serialized_string << endl;
-    
-    return 0;
+}
+
+void stl_like_access()
+{
+    // create an array using push_back
+    json j;
+    j.push_back("foo");
+    j.push_back(1);
+    j.push_back(true);
+
+    // also use emplace_back
+    j.emplace_back(1.78);
+
+    // iterate the array
+    for (json::iterator it = j.begin(); it != j.end(); ++it) 
+    {
+      std::cout << *it << '\n';
+    }
+}
+
+void convert_from_stl_container()
+{
+    std::map<std::string, int> c_map { {"one", 1}, {"two", 2}, {"three", 3} };
+    json j_map(c_map);
+    cout << j_map.dump(4) << endl;
 }
 
 int main()
 {
-    main_create_json_object();
-    main_json_from_string();
-    main_json_to_string();
+    //create_json_object();
+    //json_from_string();
+    //json_to_string();
+    //stl_like_access();
+    convert_from_stl_container();
+    
+    return 0;
 }
 
 
