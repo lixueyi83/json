@@ -51,5 +51,13 @@ int main(void)
     /* test 4 */
     cout << g_config << endl;
 
+    cout << "------------------------------" << endl;
+    /* test 5 */
+    std::map<std::string, int> c_map { {"one", 1}, {"two", 2}, {"three", 3} };
+    json j_map(c_map);
+    cout << j_map << endl;
+
+
+
     return 0;
 }
